@@ -1,10 +1,18 @@
 package com.johnErler.CustomerData.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@Table(name = "customer")
 public class Customer {
 
-    private Integer customerId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     private String firstName;
     private String lastName;
     private String street;
@@ -13,8 +21,8 @@ public class Customer {
     private String zipcode;
     private String rewardLevel;
 
-    public Customer(Integer customerId, String firstName, String lastName, String street, String city, String state, String zipcode, String rewardLevel) {
-        this.customerId = customerId;
+    public Customer(Integer id, String firstName, String lastName, String street, String city, String state, String zipcode, String rewardLevel) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.street = street;
@@ -25,11 +33,11 @@ public class Customer {
     }
 
     public Integer getCustomerId() {
-        return customerId;
+        return id;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
+    public void setCustomerId(Integer id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -93,18 +101,18 @@ public class Customer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Customer customer = (Customer) o;
-        return Objects.equals(customerId, customer.customerId) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(street, customer.street) && Objects.equals(city, customer.city) && Objects.equals(state, customer.state) && Objects.equals(zipcode, customer.zipcode) && Objects.equals(rewardLevel, customer.rewardLevel);
+        return Objects.equals(id, customer.id) && Objects.equals(firstName, customer.firstName) && Objects.equals(lastName, customer.lastName) && Objects.equals(street, customer.street) && Objects.equals(city, customer.city) && Objects.equals(state, customer.state) && Objects.equals(zipcode, customer.zipcode) && Objects.equals(rewardLevel, customer.rewardLevel);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(customerId, firstName, lastName, street, city, state, zipcode, rewardLevel);
+        return Objects.hash(id, firstName, lastName, street, city, state, zipcode, rewardLevel);
     }
 
     @Override
     public String toString() {
         return "Customer{" +
-                "customerId=" + customerId +
+                "customerId=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", street='" + street + '\'' +
